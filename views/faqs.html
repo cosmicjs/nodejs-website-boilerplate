@@ -2,14 +2,14 @@
   <main id="main">
     <div class="container mb-40">
       <h1>{{ page.title }}</h1>
-      {{# page.metafields }}
+      {{# page.metafield.faqs.children }}
         <div class="mb-60">
           <h3>{{ title }}</h3>
           <div>
             {{{ value }}}
           </div>
         </div>
-      {{/ page.metafields }}
+      {{/ page.metafield.faqs.children }}
     </div>
   </main>
 {{> footer }}

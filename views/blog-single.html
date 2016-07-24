@@ -1,7 +1,12 @@
 {{> header }}
   <main id="main">
     <div class="container mb-40">
-      <h1>{{ page.title }}</h1>
+      <div class="mb-20">
+        <h1>{{ page.title }}</h1>
+        <div>
+          <img class="img-circle" style="width: 30px" src="{{ page.metafield.author.object.metafields.0.imgix_url }}?w=100">&nbsp;&nbsp;&nbsp;{{ page.metafield.author.object.title }}
+        </div>
+      </div>
       {{# page.metafield.hero }}
         <div class="mb-20">
           <img class="img-responsive center-block" src="{{ page.metafield.hero.imgix_url }}?w=900">
