@@ -7,7 +7,7 @@ The Node.js Website Boilerplate is a website template can be used as a starting 
 4. Full-site search functionality<br />
 5. All content is easily mangaged in Cosmic JS including pages, blog and contact info.
 <br /><br />
-Sign up at [https://cosmicjs.com](Cosmic JS) to install this app with demo content to begin.
+Sign up at [https://cosmicjs.com](Cosmic JS) to install this app with demo content to begin.<br /><br />
 ####Get started
 ```
 npm install
