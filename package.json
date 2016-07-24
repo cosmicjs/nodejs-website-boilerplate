@@ -32,10 +32,5 @@
     "moment": "^2.11.2",
     "nodemailer": "^2.5.0",
     "npm": "^3.7.2"
-  },
-  "devDependencies": {
-    "concat-cli": "^4.0.0",
-    "less": "^2.7.1",
-    "minifier": "^0.7.1"
   }
 }
