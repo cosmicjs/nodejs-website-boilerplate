@@ -8,7 +8,7 @@
     "development": "NODE_ENV=development PORT=5000 NODE_ENV=development nodemon app.js -e js,html",
     "concat-js": "rm -f public/js/combined.js; rm -f public/js/combined.min.js; concat-cli -f public/js/* -o public/js/combined.js",
     "uglifyjs": "touch public/js/combined.min.js; uglifyjs public/js/combined.js -o public/js/combined.min.js",
-    "less": "lessc src/less/main.less public/css/main.css",
+    "less": "lessc public/less/main.less public/css/main.css",
     "concat-css": "concat-cli -f public/css/font-awesome.min.css public/css/css-helpers.min.css public/css/main.css -o public/css/combined.css",
     "minify-css": "rm -f public/css/main.min.css; minify public/css/combined.css public/css/main.min.css"
   },
