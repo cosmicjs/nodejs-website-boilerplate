@@ -39,7 +39,7 @@ module.exports = (app, config, partials) => {
         text_body += 'Email: ' + data.email + '<br />'
         text_body += 'Phone: ' + data.phone + '<br />'
         text_body += 'Message: <br />' + data.message + '<br /><br />'
-        text_body += 'Login to your Cosmic JS account to manage your users: https://cosmicjs.com<br />'
+        text_body += 'Login to your Cosmic JS bucket dashboard to view your form submissions: https://cosmicjs.com<br />'
         if (!config.SMTPS_STRING)
           return res.status(500).send({ "status": "error", "message": "Email not sent.  You need to add the smtps string to your config." })
         const transporter = nodemailer.createTransport(config.SMTPS_STRING);
