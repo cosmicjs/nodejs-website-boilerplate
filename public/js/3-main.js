@@ -1,6 +1,8 @@
 $(function() {
   $('.phone-mask').mask('000-000-0000');
-  stickyFooter();
+  $(window).on('load', function() {
+    stickyFooter();
+  });
   $(window).on('resize', function() {
     stickyFooter();
   });
