@@ -1,7 +1,7 @@
 #Node.js Website Boilerplate
 The Node.js Website Boilerplate is a website template that satisfies some basic use cases like dynamic pages, blog, contact form and search.
 ##Demo
-[View a demo website here](http://medical-professional.cosmicapp.co)
+[Click here to view a demo website](http://medical-professional.cosmicapp.co)
 ##Features
 1. Fully responsive down to mobile w/ Bootstrap<br />
 2. SEO ready<br />
