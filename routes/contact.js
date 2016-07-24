@@ -81,6 +81,8 @@ module.exports = (app, config, partials) => {
             }
           ]
         }
+        if (config.COSMIC_WRITE_KEY)
+          object.write_key = config.COSMIC_WRITE_KEY
         Cosmic.addObject({ bucket: { slug: config.COSMIC_BUCKET } }, object, (err, response) => {
           if (err)
             res.status(500).json({ status: 'error', data: response })
