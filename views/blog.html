@@ -7,6 +7,9 @@
             <a href="/blog/{{ slug }}">
               <h3>{{ title }}</h3>
             </a>
+            <div>
+              <img class="img-circle" style="width: 30px" src="{{ metafield.author.object.metafields.0.imgix_url }}?w=100">&nbsp;&nbsp;&nbsp;{{ metafield.author.object.title }}
+            </div>
           </div>
           <div class="mb-20">
             <a href="/blog/{{ slug }}">
