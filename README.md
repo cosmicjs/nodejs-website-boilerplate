@@ -19,6 +19,8 @@ Import the `bucket.json` file into your Cosmic JS bucket.  Then run:
 ```
 COSMIC_BUCKET=your-bucket-slug npm start
 ```
+####Contact email
+Because Node.js doesn't have a mail server, the contact form uses a SMTPS to connect to your mail server of choice. To do this, add an SMTPS_STRING to your ENV vars in your Cosmic JS bucket.  This is located in Your Bucket > Settings > Deploy Website.
 Go to [http://localhost:3000](http://localhost:3000) in your browser of choice.
 ###Run in development
 ```
