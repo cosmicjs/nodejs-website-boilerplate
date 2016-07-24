@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run concat-js; npm run minify-js; npm run less; npm run concat-css; npm run minify-css; NODE_ENV=production node app.js",
     "development": "NODE_ENV=development PORT=5000 NODE_ENV=development nodemon app.js -e js,html",
-    "concat-js": "concat-cli -f public/js/* -o public/js/combined.js",
+    "concat-js": "rm -f public/js/combined.js; rm -f public/js/combined.min.js; concat-cli -f public/js/* -o public/js/combined.js",
     "minify-js": "minify public/js/combined.js",
     "less": "lessc src/less/main.less public/css/main.css",
     "concat-css": "concat-cli -f public/css/font-awesome.min.css public/css/css-helpers.min.css public/css/main.css -o public/css/combined.css",
