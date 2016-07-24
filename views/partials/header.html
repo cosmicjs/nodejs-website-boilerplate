@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{{ cosmic.object.header.metafield.site_title.value }}</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+  {{^ is_dev }}
+    <link rel="stylesheet" href="/css/combined.min.css" />
+  {{/ is_dev }}
+  {{# is_dev }}
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/css-helpers.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+  {{/ is_dev }}
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <meta name="description" content="{{ page.metafield.seo_description.value }}">
+</head>
+<body>
+<header id="header">
+  <div class="container pt-20 pb-20 text-center h-140">
+    <a href="/">
+      <img class="w-200" src="{{ cosmic.object.header.metafield.logo.imgix_url }}?w=400">
+    </a>
+  </div>
+  <div class="mb-10 text-center h-70">
+    <a href="{{ cosmic.object.bbb.metafield.bbb_link.value }}" target="_blank">
+      <img class="w-150" src="{{ cosmic.object.bbb.metafield.bbb_image.imgix_url }}?w=300">
+    </a>
+  </div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          {{# cosmic.object.nav.metafields }}
+            {{^ children.length }}
+              <li><a href="{{ value }}">{{ title }}</a></li>
+            {{/ children.length }}
+            {{# children.length }}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  {{ title }} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  {{# children }}
+                    <li><a href="{{ value }}">{{ title }}</a></li>
+                  {{/ children }}
+                </ul>
+              </li>
+            {{/ children.length }}
+          {{/ cosmic.object.nav.metafields }}
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+</header>

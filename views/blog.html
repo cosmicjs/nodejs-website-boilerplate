@@ -1,0 +1,23 @@
+{{> header }}
+  <main id="main">
+    <div class="container mb-40">
+      {{# blogs }}
+        <div class="mb-60">
+          <div class="mb-20">
+            <a href="/blog/{{ slug }}">
+              <h3>{{ title }}</h3>
+            </a>
+          </div>
+          <div class="mb-20">
+            <a href="/blog/{{ slug }}">
+              <img class="img-responsive center-block" src="{{ metafield.hero.imgix_url }}?w=900">
+            </a>
+          </div>
+          <div>
+            {{{ content }}}
+          </div>
+        </div>
+      {{/ blogs }}
+    </div>
+  </main>
+{{> footer }}

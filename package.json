@@ -1,0 +1,38 @@
+{
+  "name": "goraines.com",
+  "version": "1.0.0",
+  "description": "goraines.com website",
+  "main": "app.js",
+  "scripts": {
+    "start": "npm run concat-js; npm run minify-js; npm run less; npm run concat-css; npm run minify-css; NODE_ENV=production node app.js",
+    "development": "NODE_ENV=development PORT=5000 NODE_ENV=development nodemon app.js -e js,html",
+    "concat-js": "concat-cli -f public/js/* -o public/js/combined.js",
+    "minify-js": "minify public/js/combined.js",
+    "less": "lessc src/less/main.less public/css/main.css",
+    "concat-css": "concat-cli -f public/css/font-awesome.min.css public/css/css-helpers.min.css public/css/main.css -o public/css/combined.css",
+    "minify-css": "rm -f public/css/main.min.css; minify public/css/combined.css public/css/main.min.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.0",
+    "babel": "^6.5.2",
+    "babel-core": "^6.5.2",
+    "babel-preset-es2015": "^6.5.0",
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.1",
+    "cosmicjs": "^2.1.2",
+    "express": "^4.13.4",
+    "hogan-express": "^0.5.2",
+    "install": "^0.4.4",
+    "lodash": "^4.13.1",
+    "moment": "^2.11.2",
+    "nodemailer": "^2.5.0",
+    "npm": "^3.7.2"
+  },
+  "devDependencies": {
+    "concat-cli": "^4.0.0",
+    "less": "^2.7.1",
+    "minifier": "^0.7.1"
+  }
+}

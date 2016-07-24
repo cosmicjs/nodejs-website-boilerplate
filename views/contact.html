@@ -1,0 +1,43 @@
+{{> header }}
+  <main id="main">
+    <div class="container mb-40">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-20">
+            <h1>{{ page.title }}</h1>
+          </div>
+          {{{ page.content }}}
+        </div>
+        <div class="col-sm-6 pt-40">
+          <form id="contact_form">
+            <div class="form-group form-group--name">
+              <label>Name</label>
+              <input name="full_name" type="text" class="form-control input-lg" placeholder="Enter your full name">
+            </div>
+            <div class="form-group form-group--email">
+              <label>Email</label>
+              <input name="email" type="text" class="form-control input-lg" placeholder="Enter your email address">
+            </div>
+            <div class="form-group form-group--phone">
+              <label>Phone (Optional)</label>
+              <input name="phone" type="text" class="form-control input-lg phone-mask" placeholder="Enter your phone number">
+            </div>
+            <div class="form-group form-group--message">
+              <label>Message</label>
+              <textarea name="message" style="height: 150px" class="form-control input-lg" placeholder="Enter a message"></textarea>
+            </div>
+            <div class="alert alert-success success-message hidden">
+              {{ page.metafield.contact_form_success_message.value }}
+            </div>
+            <div class="alert alert-danger error-message hidden">
+              Error
+            </div>
+            <div class="form-group mt-20">
+              <button class="btn btn-primary btn-lg submit-btn" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+{{> footer }}

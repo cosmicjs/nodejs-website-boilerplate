@@ -1,0 +1,47 @@
+<div class="clearfix"></div>
+<footer id="footer" class="footer invisible">
+  <div class="container mt-40 pb-60 pt-20">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="font-20 mb-10">Contact Us</div>
+        <b>Phone:</b><br />
+        {{ cosmic.object.contact-info.metafield.phone.value }}<br />
+        <b>Email:</b><br />
+        <a href="mailto:{{ cosmic.object.contact-info.metafield.email.value }}">{{ cosmic.object.contact-info.metafield.email.value }}</a>
+        <br />
+        <b>Address:</b><br />
+        {{{ cosmic.object.contact-info.metafield.address.value }}}
+      </div>
+      <div class="col-sm-4">
+        <div class="font-20 mb-20">Connect</div>
+        <div>
+          <a class="mr-10" href="{{ cosmic.object.social.metafield.facebook.value }}" target="_blank">
+            <i class="fa fa-facebook font-26"></i>
+          </a>
+          <a class="mr-10" href="{{ cosmic.object.social.metafield.twitter.value }}" target="_blank">
+            <i class="fa fa-twitter font-26"></i>
+          </a>
+          <a class="mr-10" href="{{ cosmic.object.social.metafield.google_plus.value }}" target="_blank">
+            <i class="fa fa-google-plus font-26"></i>
+          </a>
+        </div>
+        <div>
+          <div class="mt-20">
+            &copy; {{ year }} {{ cosmic.object.footer.metafield.company_title.value }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{^ is_dev }}
+    <script src="/js/combined.min.js"></script>
+  {{/ is_dev }}
+  {{# is_dev }}
+    <script src="/js/0-jquery.min.js"></script>
+    <script src="/js/1-jquery.mask.js"></script>
+    <script src="/js/2-bootstrap.min.js"></script>
+    <script src="/js/3-main.js"></script>
+  {{/ is_dev }}
+</footer>
+</body>
+</html>
