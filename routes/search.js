@@ -16,11 +16,21 @@ module.exports = (app, config, partials) => {
         let search_results = []
         objects.forEach(object => {
           if(object.title.toLowerCase().indexOf(q) !== -1 || object.content.toLowerCase().indexOf(q) !== -1) {
+            object.teaser = object.content.replace(/(<([^>]+)>)/ig,"").substring(0, 300)
+            if (object.type_slug === 'blogs')
+              object.permalink = '/blog/' + object.slug
+            else
+              object.permalink = '/' + object.slug
             search_results.push(object)
           }
           if (!_.find(search_results, { _id: object._id })) {
             object.metafields.forEach(metafield => {
               if(metafield.value.toLowerCase().indexOf(q) !== -1 && !_.find(search_results, { _id: object._id })) {
+                object.teaser = object.content.replace(/(<([^>]+)>)/ig,"").substring(0, 300)
+                if (object.type_slug === 'blogs')
+                  object.permalink = '/blog/' + object.slug
+                else
+                  object.permalink = '/' + object.slug
                 search_results.push(object)
               } 
             })

@@ -14,14 +14,19 @@
       {{{ page.content }}}
       <div>
         {{# search_results }}
-          <div class="mb-60">
+          <div class="mb-40">
             <div class="mb-20">
-              <a href="/{{ slug }}">
+              <a href="{{ permalink }}">
                 <h3>{{ title }}</h3>
               </a>
             </div>
             <div>
-              {{{ content }}}
+              {{ teaser }}...
+            </div>
+            <div>
+              <a href="/blog/{{ slug }}">
+                Read more
+              </a>
             </div>
           </div>
         {{/ search_results }}
