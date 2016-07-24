@@ -15,7 +15,7 @@ Sign up for [Cosmic JS](https://cosmicjs.com) to install the demo content and de
 ```
 npm install
 ```
-Import the `bucket.json` file into your Cosmic JS bucket.  Then run:
+Import the `bucket.json` file into your Cosmic JS bucket.  To do this go to Your Bucket > Settings > Import / Export Data.  Then run:
 ```
 COSMIC_BUCKET=your-bucket-slug npm start
 ```
