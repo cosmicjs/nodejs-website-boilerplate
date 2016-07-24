@@ -8,6 +8,7 @@ Features include:<br /><br />
 5. All content is easily mangaged in Cosmic JS including pages, blog and contact info.<br /><br />
 Sign up at [https://cosmicjs.com](Cosmic JS) to install this app with demo content to begin.
 ####Get started
+```
 npm install
 ```
 Then run 
