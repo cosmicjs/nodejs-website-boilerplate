@@ -9,6 +9,9 @@ module.exports = (app, config, partials) => {
       const blogs = response.objects.type.blogs
       res.locals.page = page
       res.locals.blogs = blogs
+      blogs.forEach((blog, i) => {
+        blogs[i].timestamp = new Date(blog.created).getTime()
+      })
       return res.render('blog.html', {
         partials
       })
@@ -23,6 +26,7 @@ module.exports = (app, config, partials) => {
         if (page.slug === slug)
           res.locals.page = page
       })
+      res.locals.page.timestamp = new Date(res.locals.page.created).getTime()
       if (!res.locals.page) {
         return res.status(404).render('404.html', {
           partials
