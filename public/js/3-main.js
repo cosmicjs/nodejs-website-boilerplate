@@ -43,6 +43,11 @@ $(function() {
     });
     return false;
   });
+  $('.make-friendly-date').each(function() {
+    var timestamp = $(this).data('timestamp');
+    var friendly_date = friendlyDate(new Date(timestamp));
+    $(this).html(friendly_date.day + ', ' + friendly_date.month + ' ' + friendly_date.date + ' ' + friendly_date.year);
+  });
 });
 // Functions
 function stickyFooter(){  
@@ -74,4 +79,25 @@ function stickyFooter(){
 function isValidEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
+}
+function friendlyDate(a) {
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var days = ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var day = days[a.getDay()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = {
+    day: day,
+    date: date,
+    month: month,
+    year: year,
+    hour: hour,
+    min: min,
+    sec: sec
+  }
+  return time;
 }

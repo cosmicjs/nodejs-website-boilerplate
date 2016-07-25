@@ -5,6 +5,7 @@
         <h1>{{ page.title }}</h1>
         <div>
           <img class="img-circle" style="width: 30px" src="{{ page.metafield.author.object.metafields.0.imgix_url }}?w=100">&nbsp;&nbsp;&nbsp;{{ page.metafield.author.object.title }}
+          &nbsp;&nbsp;<span class="make-friendly-date" data-timestamp="{{ page.timestamp }}"></span>
         </div>
       </div>
       {{# page.metafield.hero }}
