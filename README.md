@@ -3,7 +3,7 @@ A website template that satisfies some common features including dynamic pages, 
 ##Demo
 [Click here to view a demo website (Medical Professional)](http://medical-professional.cosmicapp.co)
 ##Features
-1. Fully responsive down to mobile w/ Bootstrap<br />
+1. Fully responsive down to mobile w/ [Bootstrap](http://getbootstrap.com) frontend<br />
 2. SEO ready<br />
 3. A contact form that sends an email to your email(s) of choice and to [Cosmic JS](https://cosmicjs.com) for easy reference<br />
 4. Full-site search functionality<br />
