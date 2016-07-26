@@ -1,7 +1,7 @@
 #Node.js Website Boilerplate
 A website template that satisfies some basic and common features including dynamic pages, blog articles, contact form, author management and website search.
 ##Demo
-[Click here to view a demo website](http://medical-professional.cosmicapp.co)
+[Click here to view a demo website (Medical Professional)](http://medical-professional.cosmicapp.co)
 ##Features
 1. Fully responsive down to mobile w/ Bootstrap<br />
 2. SEO ready<br />
