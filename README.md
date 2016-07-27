@@ -11,7 +11,7 @@ A website template that satisfies some common website requirements including dyn
 
 Sign up for [Cosmic JS](https://cosmicjs.com) to install the demo content and deploy this website.
 
-###Get started
+##Get started
 ```
 npm install
 ```
