@@ -21,7 +21,7 @@ Import the `example-bucket.json` file into your Cosmic JS bucket.  To do this go
 
 ![Import Bucket](https://cosmicjs.com/uploads/4edef890-52e6-11e6-9a1c-233e4e7aa20d-ZadK2PbDDR.gif "Import Bucket")
 
-Then run:
+###Run in production
 ```
 COSMIC_BUCKET=your-bucket-slug npm start
 ```
