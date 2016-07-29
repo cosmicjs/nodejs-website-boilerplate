@@ -1,6 +1,5 @@
-// Other pages
+// blog.js
 import Cosmic from 'cosmicjs'
-import moment from 'moment'
 module.exports = (app, config, partials) => {
   app.get('/blog', (req, res) => {
     Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET } }, (err, response) => {

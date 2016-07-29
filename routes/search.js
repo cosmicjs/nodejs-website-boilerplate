@@ -1,6 +1,5 @@
-// Other pages
+// search.js
 import Cosmic from 'cosmicjs'
-import moment from 'moment'
 import _ from 'lodash'
 module.exports = (app, config, partials) => {
   app.get('/search', (req, res) => {
