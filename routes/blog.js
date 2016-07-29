@@ -1,4 +1,4 @@
-// Other pages
+// blog.js
 import Cosmic from 'cosmicjs'
 import moment from 'moment'
 module.exports = (app, config, partials) => {
