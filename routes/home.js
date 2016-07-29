@@ -1,4 +1,4 @@
-// Home page
+// home.js
 import Cosmic from 'cosmicjs'
 module.exports = (app, config, partials) => {
   app.get('/', (req, res) => {
