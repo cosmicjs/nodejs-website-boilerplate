@@ -1,4 +1,4 @@
-// Other pages
+// contact.js
 import Cosmic from 'cosmicjs'
 import moment from 'moment'
 import nodemailer from 'nodemailer'
