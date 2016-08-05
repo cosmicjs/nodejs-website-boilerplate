@@ -8,6 +8,7 @@ module.exports = (app, config, partials) => {
       carousel_items.forEach((item, i) => {
         if (i === 0)
           item.is_first = true
+        item.index = i
         item.imgix_url = 'https://cosmicjs.imgix.net/' + item.value
       })
       const blurb_items = res.locals.cosmic.object.home.metafield.blurbs.children

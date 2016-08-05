@@ -5,7 +5,7 @@
         <!-- Indicators -->
         <ol class="carousel-indicators">
           {{# page.metafield.carousel.children }}
-            <li data-target="#carousel-example-generic" data-slide-to="{{ @index }}"{{# is_first }} class="active"{{/ is_first }}></li>
+            <li data-target="#carousel-example-generic" data-slide-to="{{ index }}"{{# is_first }} class="active"{{/ is_first }}></li>
           {{/ page.metafield.carousel.children }}
         </ol>
         <!-- Wrapper for slides -->
