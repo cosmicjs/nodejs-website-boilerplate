@@ -6,7 +6,7 @@ import _ from 'lodash'
 module.exports = (app, config, partials) => {
   app.get('/contact', (req, res) => {
     const slug = 'contact'
-    Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET } }, (err, response) => {
+    Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET, read_key: config.COSMIC_READ_KEY } }, (err, response) => {
       res.locals.cosmic = response
       const pages = response.objects.type.pages
       pages.forEach(page => {
@@ -82,7 +82,7 @@ module.exports = (app, config, partials) => {
         }
         if (config.COSMIC_WRITE_KEY)
           object.write_key = config.COSMIC_WRITE_KEY
-        Cosmic.addObject({ bucket: { slug: config.COSMIC_BUCKET } }, object, (err, response) => {
+        Cosmic.addObject({ bucket: { slug: config.COSMIC_BUCKET, write_key: config.COSMIC_WRITE_KEY } }, object, (err, response) => {
           if (err)
             res.status(500).json({ status: 'error', data: response })
           else

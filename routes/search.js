@@ -3,7 +3,7 @@ import Cosmic from 'cosmicjs'
 import _ from 'lodash'
 module.exports = (app, config, partials) => {
   app.get('/search', (req, res) => {
-    Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET } }, (err, response) => {
+    Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET, read_key: config.COSMIC_READ_KEY } }, (err, response) => {
       res.locals.cosmic = response
       if (req.query.q) {
         res.locals.q = req.query.q
