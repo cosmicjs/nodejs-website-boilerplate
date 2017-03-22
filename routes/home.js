@@ -6,7 +6,6 @@ module.exports = (app, config, partials) => {
       res.locals.cosmic = response
       const carousel_items = res.locals.cosmic.object.home.metafield.carousel.children
       carousel_items.forEach((item, i) => {
-        console.log(item)
         if (i === 0)
           item.is_first = true
         item.index = i
