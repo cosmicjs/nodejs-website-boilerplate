@@ -20,7 +20,7 @@ module.exports = (app, config, partials) => {
   })
   // Submit form
   app.post('/contact', (req, res) => {
-    const data = req.body
+    var data = req.body
     async.series([
       callback => {
         Cosmic.getObject({ bucket: { slug: config.COSMIC_BUCKET } }, { slug: 'contact-form' }, (err, response) => {
@@ -33,30 +33,24 @@ module.exports = (app, config, partials) => {
         })
       },
       callback => {
-        // Send to email
-        let text_body = res.locals.contact_form.subject + '<br />'
-        text_body += 'Email: ' + data.email + '<br />'
-        text_body += 'Phone: ' + data.phone + '<br />'
-        text_body += 'Message: <br />' + data.message + '<br /><br />'
-        text_body += 'Login to your Cosmic JS bucket dashboard to view your form submissions: https://cosmicjs.com<br />'
-        if (!config.SMTPS_STRING)
-          return res.status(500).send({ "status": "error", "message": "Email not sent.  You need to add the smtps string to your config." })
-        const transporter = nodemailer.createTransport(config.SMTPS_STRING);
-        var mailOptions = {
-          from: 'Cosmic JS <support@cosmicjs.com>', // sender address
-          to: res.locals.contact_form.to, // list of receivers
-          subject: res.locals.contact_form.subject, // Subject line
-          text: text_body, // plaintext body
-          html: text_body // html body
+        var api_key = process.env.MAILGUN_KEY // add mailgun key
+        var domain = process.env.MAILGUN_DOMAIN // add mailgun domain
+        if (!api_key || !domain)
+          return res.status(500).send({ "status": "error", "message": "You must add a MailGun api key and domain using environment variables located in Your Cosmic JS Bucket > Deploy to Web.  Contact your developer to add these values." });
+        var mailgun = require('mailgun-js')({ apiKey: api_key, domain: domain })
+        var message = 'Name: ' + data.full_name + '\n\n' +
+        'Subject: ' + res.locals.contact_form.subject + '\n\n' +
+        'Message: ' + data.message + '\n\n'
+        var mailgun_data = {
+          from: 'Your Website <me@' + domain + '>',
+          to: res.locals.contact_form.to,
+          subject: data.full_name + ' sent you a new message: ' + data.message,
+          text: message
         }
-        // Send mail with defined transport object
-        transporter.sendMail(mailOptions, function(error, info){
-          if(error){
-            console.log(error)
-            return res.status(500).send({ "status": "error", "message": "Email not sent.  You need to add the smtps string to your config." })
-          } else {
-            callback()
-          }
+        mailgun.messages().send(mailgun_data, function (error, body) {
+          if (error)
+            return res.status(500).send({ "status": "error", "message": "You must add a MailGun api key and domain using environment variables located in Your Cosmic JS Bucket > Deploy to Web.  Contact your developer to add these values." });
+          callback()
         })
       },
       callback => {
@@ -82,12 +76,9 @@ module.exports = (app, config, partials) => {
         }
         if (config.COSMIC_WRITE_KEY)
           object.write_key = config.COSMIC_WRITE_KEY
+        // Write to Cosmic Bucket (Optional)
         Cosmic.addObject({ bucket: { slug: config.COSMIC_BUCKET, write_key: config.COSMIC_WRITE_KEY } }, object, (err, response) => {
-          if (err)
-            res.status(500).json({ status: 'error', data: response })
-          else
-            res.json({ status: 'success', data: response })
-          res.end()
+          return res.json({ status: 'success', data: response })
         })
       }
     ])
