@@ -32,6 +32,12 @@ Create a `config/development.js` file and match it to `config/production.js` wit
 npm run development
 ```
 Go to [http://localhost:5000](http://localhost:5000).
-### Config
-#### Contact email
-Because Node.js doesn't have a mail server, the contact form uses an SMTPS string to connect to your mail server of choice. To do this, add an `SMTPS_STRING` to your ENV vars in your Cosmic JS bucket.  This is located in Your Bucket > Settings > Deploy Website.  An example string looks like: `smtps://yourname%40gmail.com:yourpass@smtp.gmail.com`.
+
+## Configure
+
+After you deploy your app, to add your [MailGun](https://www.mailgun.com/) credentials go to your Cosmic Bucket Dashboard and click Settings > Deploy Web App.  Click 'Set Environment Variables' tab and add the following variables:
+
+Key | Value
+--- | ---
+| MAILGUN_KEY     | your key
+| MAILGUN_DOMAIN      | your domain
