@@ -33,11 +33,23 @@ npm run development
 ```
 Go to [http://localhost:5000](http://localhost:5000).
 
-## Configure
+## Contact form setup
 
-After you deploy your app, to add your [MailGun](https://www.mailgun.com/) credentials go to your Cosmic Bucket Dashboard and click Settings > Deploy Web App.  Click 'Set Environment Variables' tab and add the following variables:
+### Install and deploy the SendGrid Function
+![SendGrid Function](https://cosmic-s3.imgix.net/a07738c0-00d6-11e9-95fe-59d8fdd00c64-sendgrid-email.png)
+The contact form on the contact page uses the [SendGrid Function](https://github.com/cosmicjs/send-email-function) to send emails. To deploy your email function go to Your Bucket > Settings > Functions. Install and deploy the SendGrid Function.
+
+### Add the SendGrid Function Endpoint
+
+#### in development
+Go to `config/development.js` and edit `SENDGRID_FUNCTION_ENDPOINT` to manually add the URL for testing.
+
+#### in production
+If you are using the Web Hosting option that's included with every Bucket:
+1. Go to Your Bucket > Settings > Web Hosting
+2. Deploy your Website
+3. Click 'Set Environment Variables' tab and add the SendGrid Function endpoint:
 
 Key | Value
 --- | ---
-| MAILGUN_KEY     | your key
-| MAILGUN_DOMAIN      | your domain
+| SENDGRID_FUNCTION_ENDPOINT     | your SendGrid Function endpoint
