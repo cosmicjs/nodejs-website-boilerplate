@@ -8,17 +8,17 @@
               <h3>{{ title }}</h3>
             </a>
             <div>
-              <img class="img-circle" style="width: 30px" src="{{ metafield.author.object.metafields.0.imgix_url }}?w=100">&nbsp;&nbsp;&nbsp;{{ metafield.author.object.title }}
+              <img class="img-circle" style="width: 30px" src="{{ metadata.author.metadata.image.imgix_url }}?w=100">&nbsp;&nbsp;&nbsp;{{ metadata.author.object.title }}
               &nbsp;&nbsp;<span class="make-friendly-date" data-timestamp="{{ timestamp }}"></span>
             </div>
           </div>
           <div class="mb-20">
             <a href="/blog/{{ slug }}">
-              <img class="img-responsive center-block" src="{{ metafield.hero.imgix_url }}?w=900">
+              <img class="img-responsive center-block" src="{{ metadata.hero.imgix_url }}?w=900">
             </a>
           </div>
           <div>
-            {{ metafield.teaser.value }}
+            {{ metadata.teaser }}
             <div>
               <a href="/blog/{{ slug }}">
                 Read more...

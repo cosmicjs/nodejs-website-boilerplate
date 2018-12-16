@@ -1,10 +1,11 @@
 // faqs.js
-import Cosmic from 'cosmicjs'
-module.exports = (app, config, partials) => {
+module.exports = (app, config, partials, _) => {
+  const bucket = config.bucket
   app.get('/faqs', (req, res) => {
-    Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET, read_key: config.COSMIC_READ_KEY } }, (err, response) => {
-      res.locals.cosmic = response
-      const page = response.object.faqs
+    bucket.getObjects().then(response => {
+      const objects = response.objects
+      res.locals.globals = require('../helpers/globals')(objects, _)
+      const page = _.find(objects, { 'slug': 'faqs' })
       res.locals.page = page
       return res.render('faqs.html', {
         partials

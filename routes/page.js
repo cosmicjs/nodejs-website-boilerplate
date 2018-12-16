@@ -1,15 +1,13 @@
 // page.js
-import Cosmic from 'cosmicjs'
-module.exports = (app, config, partials) => {
+module.exports = (app, config, partials, _) => {
   app.get('/:slug', (req, res) => {
+    const bucket = config.bucket
     const slug = req.params.slug
-    Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET, read_key: config.COSMIC_READ_KEY } }, (err, response) => {
-      res.locals.cosmic = response
-      const pages = response.objects.type.pages
-      pages.forEach(page => {
-        if (page.slug === slug)
-          res.locals.page = page
-      })
+    bucket.getObjects().then(response => {
+      const objects = response.objects
+      res.locals.globals = require('../helpers/globals')(objects, _)
+      const page = _.find(objects, { 'slug': slug })
+      res.locals.page = page
       if (!res.locals.page) {
         return res.status(404).render('404.html', {
           partials
@@ -18,6 +16,9 @@ module.exports = (app, config, partials) => {
       return res.render('page.html', {
         partials
       })
+    }).catch(error => {
+      console.log(error)
+      return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
     })
   })
 }

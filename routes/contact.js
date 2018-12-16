@@ -1,17 +1,12 @@
 // contact.js
 import axios from 'axios'
 import async from 'async'
-import _ from 'lodash'
-module.exports = (app, config, partials) => {
+module.exports = (app, config, partials, _) => {
   const bucket = config.bucket
   app.get('/contact', (req, res) => {
     bucket.getObjects().then(response => {
       const objects = response.objects
-      res.locals.header = _.find(objects, { 'slug': 'header' })
-      res.locals.nav = _.find(objects, { 'slug': 'nav' })
-      res.locals.social = _.find(objects, { 'slug': 'social' })
-      res.locals.contact_info = _.find(objects, { 'slug': 'contact-info' })
-      res.locals.footer = _.find(objects, { 'slug': 'footer' })
+      res.locals.globals = require('../helpers/globals')(objects, _)
       res.locals.page = _.find(objects, { 'slug': 'contact' })
       return res.render('contact.html', {
         partials

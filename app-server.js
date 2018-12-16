@@ -4,6 +4,7 @@ import hogan from 'hogan-express'
 import http_module from 'http'
 import bodyParser from 'body-parser'
 import compression from 'compression'
+import _ from 'lodash'
 import config from './config'
 import bucket from './config'
 config.bucket = bucket
@@ -28,7 +29,7 @@ const partials = {
   header: 'partials/header',
   footer: 'partials/footer'
 }
-require('./routes')(app, config, partials)
+require('./routes')(app, config, partials, _)
 const http = http_module.Server(app)
 http.listen(app.get('port'), () => {
   console.info('==> 🌎  Go to http://localhost:%s', app.get('port'));
