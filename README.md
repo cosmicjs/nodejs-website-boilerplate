@@ -34,7 +34,7 @@ npm run development
 Go to [http://localhost:5000](http://localhost:5000).
 
 ## Contact form setup
-Install and deploy the SendGrid Email Function
+Install and deploy the SendGrid Email Function.
 
 <img src="https://cosmic-s3.imgix.net/a07738c0-00d6-11e9-95fe-59d8fdd00c64-sendgrid-email.png?w=1500" width="700" />
 
