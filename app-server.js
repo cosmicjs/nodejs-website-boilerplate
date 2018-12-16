@@ -6,8 +6,13 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import _ from 'lodash'
 import config from './config'
-import bucket from './config'
-config.bucket = bucket
+import Cosmic from 'cosmicjs'
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: config.COSMIC_BUCKET,
+  read_key: config.COSMIC_READ_KEY,
+  write_key: config.COSMIC_WRITE_KEY
+})
 const app = express()
 app.use(bodyParser.json())
 app.use(compression())
@@ -29,7 +34,7 @@ const partials = {
   header: 'partials/header',
   footer: 'partials/footer'
 }
-require('./routes')(app, config, partials, _)
+require('./routes')(app, config, bucket, partials, _)
 const http = http_module.Server(app)
 http.listen(app.get('port'), () => {
   console.info('==> 🌎  Go to http://localhost:%s', app.get('port'));

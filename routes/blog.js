@@ -1,8 +1,8 @@
 // blog.js
-module.exports = (app, config, partials, _) => {
-  const bucket = config.bucket
-  app.get('/blog', (req, res) => {
-    bucket.getObjects().then(response => {
+module.exports = (app, config, bucket, partials, _) => {
+  app.get('/blog', async (req, res) => {
+    try {
+      const response = await bucket.getObjects()
       const objects = response.objects
       res.locals.globals = require('../helpers/globals')(objects, _)
       const page = _.find(objects, { 'slug': 'blog' })
@@ -15,14 +15,15 @@ module.exports = (app, config, partials, _) => {
       return res.render('blog.html', {
         partials
       })
-    }).catch(error => {
+    } catch(error) {
       console.log(error)
       return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
-    })
+    }
   })
-  app.get('/blog/:slug', (req, res) => {
+  app.get('/blog/:slug', async (req, res) => {
     const slug = req.params.slug
-    bucket.getObjects().then(response => {
+    try {
+      const response = await bucket.getObjects()
       const objects = response.objects
       res.locals.globals = require('../helpers/globals')(objects, _)
       const page = _.find(objects, { slug })
@@ -42,6 +43,9 @@ module.exports = (app, config, partials, _) => {
       return res.render('blog-single.html', {
         partials
       })
-    })
+    } catch(error) {
+      console.log(error)
+      return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
+    }
   })
 }

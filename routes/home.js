@@ -1,8 +1,8 @@
 // home.js
-module.exports = (app, config, partials, _) => {
-  const bucket = config.bucket
-  app.get('/', (req, res) => {
-    bucket.getObjects().then(response => {
+module.exports = (app, config, bucket, partials, _) => {
+  app.get('/', async (req, res) => {
+    try {
+      const response = await bucket.getObjects()
       const objects = response.objects
       res.locals.globals = require('../helpers/globals')(objects, _)
       const page = _.find(objects, { 'slug': 'home' })
@@ -16,9 +16,9 @@ module.exports = (app, config, partials, _) => {
       return res.render('index.html', {
         partials
       })
-    }).catch(error => {
+    } catch (error) {
       console.log(error)
       return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
-    })
+    }
   })
 }

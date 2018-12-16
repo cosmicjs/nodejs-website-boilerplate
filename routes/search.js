@@ -1,9 +1,13 @@
 // search.js
-module.exports = (app, config, partials, _) => {
-  const bucket = config.bucket
-  app.get('/search', (req, res) => {
-    bucket.getObjects().then(response => {
+module.exports = (app, config, bucket, partials, _) => {
+  app.get('/search', async (req, res) => {
+    try {
+      const response = await bucket.getObjects()
       const objects = response.objects
+      const searchable_objects = [
+        ..._.filter(objects, { type_slug: 'pages' }),
+        ..._.filter(objects, { type_slug: 'blogs' })
+      ]
       res.locals.globals = require('../helpers/globals')(objects, _)
       const page = _.find(objects, { 'slug': 'search' })
       res.locals.page = page
@@ -11,7 +15,7 @@ module.exports = (app, config, partials, _) => {
         res.locals.q = req.query.q
         const q = req.query.q.toLowerCase()
         let search_results = []
-        objects.forEach(object => {
+        searchable_objects.forEach(object => {
           if(object.title.toLowerCase().indexOf(q) !== -1 || object.content.toLowerCase().indexOf(q) !== -1) {
             object.teaser = object.content.replace(/(<([^>]+)>)/ig,"").substring(0, 300)
             if (object.type_slug === 'blogs')
@@ -38,9 +42,9 @@ module.exports = (app, config, partials, _) => {
       return res.render('search.html', {
         partials
       })
-    }).catch(error => {
+    } catch(error) {
       console.log(error)
       return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
-    })
+    }
   })
 }

@@ -1,9 +1,9 @@
 // page.js
-module.exports = (app, config, partials, _) => {
-  app.get('/:slug', (req, res) => {
-    const bucket = config.bucket
+module.exports = (app, config, bucket, partials, _) => {
+  app.get('/:slug', async (req, res) => {
     const slug = req.params.slug
-    bucket.getObjects().then(response => {
+   try {
+      const response = await bucket.getObjects()
       const objects = response.objects
       res.locals.globals = require('../helpers/globals')(objects, _)
       const page = _.find(objects, { 'slug': slug })
@@ -17,9 +17,9 @@ module.exports = (app, config, partials, _) => {
       return res.render('page.html', {
         partials
       })
-    }).catch(error => {
+    } catch(error) {
       console.log(error)
       return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
-    })
+    }
   })
 }
