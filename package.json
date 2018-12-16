@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.0.0",
+    "axios": "^0.18.0",
     "babel": "^6.5.2",
     "babel-core": "^6.5.2",
     "babel-preset-es2015": "^6.5.0",
@@ -23,14 +24,13 @@
     "clean-css": "^3.4.19",
     "compression": "^1.6.1",
     "concat-cli": "^4.0.0",
-    "cosmicjs": "^2.1.2",
+    "cosmicjs": "^3.2.14",
     "express": "^4.13.4",
     "hogan-express": "^0.5.2",
     "install": "^0.4.4",
     "less": "^2.7.1",
     "lodash": "^4.13.1",
     "mailgun-js": "^0.9.0",
-    "nodemailer": "^2.5.0",
     "npm": "^3.7.2",
     "uglify-js": "^2.7.0"
   }

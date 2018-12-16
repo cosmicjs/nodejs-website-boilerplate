@@ -1,4 +1,4 @@
-// Config
+// Routes
 module.exports = (app, config, partials) => {
   require('./home')(app, config, partials)
   require('./blog')(app, config, partials)

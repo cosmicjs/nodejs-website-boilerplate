@@ -5,6 +5,8 @@ import http_module from 'http'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import config from './config'
+import bucket from './config'
+config.bucket = bucket
 const app = express()
 app.use(bodyParser.json())
 app.use(compression())

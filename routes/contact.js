@@ -1,21 +1,24 @@
 // contact.js
-import Cosmic from 'cosmicjs'
-import nodemailer from 'nodemailer'
+import axios from 'axios'
 import async from 'async'
 import _ from 'lodash'
 module.exports = (app, config, partials) => {
+  const bucket = config.bucket
   app.get('/contact', (req, res) => {
-    const slug = 'contact'
-    Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET, read_key: config.COSMIC_READ_KEY } }, (err, response) => {
-      res.locals.cosmic = response
-      const pages = response.objects.type.pages
-      pages.forEach(page => {
-        if (page.slug === slug)
-          res.locals.page = page
-      })
+    bucket.getObjects().then(response => {
+      const objects = response.objects
+      res.locals.header = _.find(objects, { 'slug': 'header' })
+      res.locals.nav = _.find(objects, { 'slug': 'nav' })
+      res.locals.social = _.find(objects, { 'slug': 'social' })
+      res.locals.contact_info = _.find(objects, { 'slug': 'contact-info' })
+      res.locals.footer = _.find(objects, { 'slug': 'footer' })
+      res.locals.page = _.find(objects, { 'slug': 'contact' })
       return res.render('contact.html', {
         partials
       })
+    }).catch(error => {
+      console.log(error)
+      return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
     })
   })
   // Submit form
@@ -23,35 +26,38 @@ module.exports = (app, config, partials) => {
     var data = req.body
     async.series([
       callback => {
-        Cosmic.getObject({ bucket: { slug: config.COSMIC_BUCKET } }, { slug: 'contact-form' }, (err, response) => {
+        bucket.getObject({ slug: 'contact-form' }).then(response => {
           const object = response.object
           res.locals.contact_form = {
-            to: _.find(object.metafields, { key: 'to' }).value,
-            subject: _.find(object.metafields, { key: 'subject' }).value,
+            to: object.metadata.to,
+            subject: object.metadata.subject,
           }
           callback()
+        }).catch(error => {
+          console.log(error)
+          return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
         })
       },
       callback => {
-        var api_key = process.env.MAILGUN_KEY // add mailgun key
-        var domain = process.env.MAILGUN_DOMAIN // add mailgun domain
-        if (!api_key || !domain)
-          return res.status(500).send({ "status": "error", "message": "You must add a MailGun api key and domain using environment variables located in Your Cosmic JS Bucket > Deploy to Web.  Contact your developer to add these values." });
-        var mailgun = require('mailgun-js')({ apiKey: api_key, domain: domain })
         var message = 'Name: ' + data.full_name + '\n\n' +
         'Subject: ' + res.locals.contact_form.subject + '\n\n' +
         'Message: ' + data.message + '\n\n'
-        var mailgun_data = {
-          from: 'Your Website <me@' + domain + '>',
+        var email_data = {
+          from: data.email,
           to: res.locals.contact_form.to,
           subject: data.full_name + ' sent you a new message: ' + data.message,
-          text: message
+          text_body: message,
+          html_body: message
         }
-        mailgun.messages().send(mailgun_data, function (error, body) {
-          if (error)
-            return res.status(500).send({ "status": "error", "message": "You must add a MailGun api key and domain using environment variables located in Your Cosmic JS Bucket > Deploy to Web.  Contact your developer to add these values." });
-          callback()
-        })
+        const url = config.SENDGRID_FUNCTION_ENDPOINT
+        axios.post(url, email_data)
+          .then(function (response) {
+            return callback()
+          })
+          .catch(function (error) {
+            console.log(error)
+            return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
+          })
       },
       callback => {
         // Send to Cosmic
@@ -74,11 +80,12 @@ module.exports = (app, config, partials) => {
             }
           ]
         }
-        if (config.COSMIC_WRITE_KEY)
-          object.write_key = config.COSMIC_WRITE_KEY
         // Write to Cosmic Bucket (Optional)
-        Cosmic.addObject({ bucket: { slug: config.COSMIC_BUCKET, write_key: config.COSMIC_WRITE_KEY } }, object, (err, response) => {
+        bucket.addObject(object).then(response => {
           return res.json({ status: 'success', data: response })
+        }).catch(function (error) {
+          console.log(error)
+          return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
         })
       }
     ])

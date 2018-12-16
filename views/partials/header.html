@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>{{ cosmic.object.header.metafield.site_title.value }}</title>
+<title>{{ header.metadata.site_title }}</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
   {{^ is_dev }}
@@ -13,15 +13,15 @@
     <link rel="stylesheet" href="/css/main.css" />
   {{/ is_dev }}
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-  <meta name="description" content="{{ page.metafield.seo_description.value }}">
-  <link rel="icon" type="image/png" href="{{ cosmic.object.header.metafield.favicon.imgix_url }}?w=32" sizes="32x32" />
-  <link rel="icon" type="image/png" href="{{ cosmic.object.header.metafield.favicon.imgix_url }}?w=16" sizes="16x16" />
+  <meta name="description" content="{{ page.metadata.seo_description }}">
+  <link rel="icon" type="image/png" href="{{ header.metadata.favicon.imgix_url }}?w=32" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{ header.metadata.favicon.imgix_url }}?w=16" sizes="16x16" />
 </head>
 <body>
 <header id="header">
   <div class="container pt-10 pb-5 text-center h-80">
     <a href="/">
-      <img class="w-200" src="{{ cosmic.object.header.metafield.logo.imgix_url }}?w=400">
+      <img class="w-200" src="{{ header.metadata.logo.imgix_url }}?w=400">
     </a>
   </div>
   <nav class="navbar navbar-default">
@@ -38,7 +38,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          {{# cosmic.object.nav.metafields }}
+          {{# nav.metafields }}
             {{^ children.length }}
               <li><a href="{{ value }}">{{ title }}</a></li>
             {{/ children.length }}
@@ -54,7 +54,7 @@
                 </ul>
               </li>
             {{/ children.length }}
-          {{/ cosmic.object.nav.metafields }}
+          {{/ nav.metafields }}
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

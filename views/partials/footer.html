@@ -5,28 +5,28 @@
       <div class="col-sm-8">
         <div class="font-20 mb-10">Contact Us</div>
         <b>Phone:</b><br />
-        {{ cosmic.object.contact-info.metafield.phone.value }}<br />
+        {{ contact_info.metadata.phone }}<br />
         <b>Email:</b><br />
-        <a href="mailto:{{ cosmic.object.contact-info.metafield.email.value }}">{{ cosmic.object.contact-info.metafield.email.value }}</a>
+        <a href="mailto:{{ contact_info.metadata.email }}">{{ contact_info.metadata.email }}</a>
         <br />
         <b>Address:</b><br />
-        {{{ cosmic.object.contact-info.metafield.address.value }}}
+        {{{ contact_info.metadata.address }}}
       </div>
       <div class="col-sm-4">
         <div class="font-20 mb-20">Connect</div>
         <div class="mb-20">
-          <a class="mr-10" href="{{ cosmic.object.social.metafield.facebook.value }}" target="_blank">
+          <a class="mr-10" href="{{ social.metadata.facebook }}" target="_blank">
             <i class="fa fa-facebook font-26"></i>
           </a>
-          <a class="mr-10" href="{{ cosmic.object.social.metafield.twitter.value }}" target="_blank">
+          <a class="mr-10" href="{{ social.metadata.twitter }}" target="_blank">
             <i class="fa fa-twitter font-26"></i>
           </a>
-          <a class="mr-10" href="{{ cosmic.object.social.metafield.google_plus.value }}" target="_blank">
+          <a class="mr-10" href="{{ social.metadata.google_plus }}" target="_blank">
             <i class="fa fa-google-plus font-26"></i>
           </a>
         </div>
         <div class="mb-20">
-          &copy; {{ year }} {{ cosmic.object.footer.metafield.company_title.value }}
+          &copy; {{ year }} {{ footer.metadata.company_title }}
         </div>
         <a href="https://cosmicjs.com" target="_blank">
           <img class="pull-left mr-15 relative" src="https://cosmicjs.com/images/logo.svg" width="28" height="28">

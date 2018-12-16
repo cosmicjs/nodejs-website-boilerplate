@@ -1,27 +1,29 @@
 // home.js
-import Cosmic from 'cosmicjs'
+import _ from 'lodash'
 module.exports = (app, config, partials) => {
+  const bucket = config.bucket
   app.get('/', (req, res) => {
-    Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET, read_key: config.COSMIC_READ_KEY } }, (err, response) => {
-      res.locals.cosmic = response
-      const carousel_items = res.locals.cosmic.object.home.metafield.carousel.children
+    bucket.getObjects().then(response => {
+      const objects = response.objects
+      res.locals.header = _.find(objects, { 'slug': 'header' })
+      res.locals.nav = _.find(objects, { 'slug': 'nav' })
+      res.locals.social = _.find(objects, { 'slug': 'social' })
+      res.locals.contact_info = _.find(objects, { 'slug': 'contact-info' })
+      res.locals.footer = _.find(objects, { 'slug': 'footer' })
+      const page = _.find(objects, { 'slug': 'home' })
+      res.locals.page = page
+      const carousel_items = page.metadata.carousel
       carousel_items.forEach((item, i) => {
         if (i === 0)
           item.is_first = true
         item.index = i
       })
-      const blurb_items = res.locals.cosmic.object.home.metafield.blurbs.children
-      blurb_items.forEach((item, i) => {
-        item.children.forEach((item_child, i) => {
-          if (item_child.type === 'file') {
-            item_child.imgix_url = 'https://cosmicjs.imgix.net/' + item_child.value
-          }
-        })
-      })
-      res.locals.page = response.object.home
       return res.render('index.html', {
         partials
       })
+    }).catch(error => {
+      console.log(error)
+      return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
     })
   })
 }
