@@ -26,9 +26,9 @@ module.exports = (app, config, bucket, partials, _) => {
         to: object.metadata.to,
         subject: object.metadata.subject,
       }
-      var message = 'Name: ' + data.full_name + '\n\n' +
-      'Subject: ' + contact_form.subject + '\n\n' +
-      'Message: ' + data.message + '\n\n'
+      var message = 'Name:<br>' + data.full_name + '<br><br>' +
+      'Subject:<br>' + contact_form.subject + '<br><br>' +
+      'Message:<br>' + data.message + '<br><br>'
       var email_data = {
         from: data.email,
         to: contact_form.to,
