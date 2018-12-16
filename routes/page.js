@@ -9,6 +9,7 @@ module.exports = (app, config, partials, _) => {
       const page = _.find(objects, { 'slug': slug })
       res.locals.page = page
       if (!res.locals.page) {
+        res.locals.page = _.find(objects, { 'slug': '404-page-not-found' })
         return res.status(404).render('404.html', {
           partials
         })  

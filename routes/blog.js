@@ -26,6 +26,12 @@ module.exports = (app, config, partials, _) => {
       const objects = response.objects
       res.locals.globals = require('../helpers/globals')(objects, _)
       const page = _.find(objects, { slug })
+      if (!page) {
+        res.locals.page = _.find(objects, { 'slug': '404-page-not-found' })
+        return res.status(404).render('404.html', {
+          partials
+        })  
+      }
       res.locals.page = page
       res.locals.page.timestamp = new Date(res.locals.page.created).getTime()
       if (!res.locals.page) {

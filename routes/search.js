@@ -1,17 +1,15 @@
 // search.js
-import Cosmic from 'cosmicjs'
-import _ from 'lodash'
-module.exports = (app, config, partials) => {
+module.exports = (app, config, partials, _) => {
+  const bucket = config.bucket
   app.get('/search', (req, res) => {
-    Cosmic.getObjects({ bucket: { slug: config.COSMIC_BUCKET, read_key: config.COSMIC_READ_KEY } }, (err, response) => {
-      res.locals.cosmic = response
+    bucket.getObjects().then(response => {
+      const objects = response.objects
+      res.locals.globals = require('../helpers/globals')(objects, _)
+      const page = _.find(objects, { 'slug': 'search' })
+      res.locals.page = page
       if (req.query.q) {
         res.locals.q = req.query.q
         const q = req.query.q.toLowerCase()
-        const objects = [
-          ...response.objects.type.pages,
-          ...response.objects.type.blogs
-        ]
         let search_results = []
         objects.forEach(object => {
           if(object.title.toLowerCase().indexOf(q) !== -1 || object.content.toLowerCase().indexOf(q) !== -1) {
@@ -37,11 +35,12 @@ module.exports = (app, config, partials) => {
         })
         res.locals.search_results = search_results
       }
-      const page = response.object.search
-      res.locals.page = page
       return res.render('search.html', {
         partials
       })
+    }).catch(error => {
+      console.log(error)
+      return res.status(500).send({ "status": "error", "message": "Yikes, something went wrong!" })
     })
   })
 }
