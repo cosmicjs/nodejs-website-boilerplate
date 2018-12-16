@@ -38,7 +38,7 @@ Go to [http://localhost:5000](http://localhost:5000).
 ### Install and deploy the SendGrid Email Function
 <img src="https://cosmic-s3.imgix.net/a07738c0-00d6-11e9-95fe-59d8fdd00c64-sendgrid-email.png?w=1500" width="700" />
 
-The contact form on the contact page uses the [SendGrid Function](https://github.com/cosmicjs/send-email-function) to send emails. To deploy your email function go to Your Bucket > Settings > Functions. Install and deploy the SendGrid Function. You will need an account with [SendGrid](https://sendgrid.com/) to add your SendGrid API key.
+The contact form on the contact page uses the [SendGrid Email Function](https://github.com/cosmicjs/send-email-function) to send emails. To deploy your email function go to Your Bucket > Settings > Functions. Install and deploy the SendGrid Function. You will need an account with [SendGrid](https://sendgrid.com/) to add your SendGrid API key.
 
 ### Add the SendGrid Function Endpoint
 
