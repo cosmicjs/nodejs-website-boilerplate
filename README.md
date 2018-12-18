@@ -53,4 +53,4 @@ If you are using the Web Hosting option that's included with every Bucket:
 
 Key | Value
 --- | ---
-| SENDGRID_FUNCTION_ENDPOINT     | your SendGrid Function endpoint
+| SENDGRID_FUNCTION_ENDPOINT     | https://lambda.aws.your-function-endpoint.com
