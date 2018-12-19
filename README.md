@@ -17,7 +17,7 @@ git clone https://github.com/cosmicjs/nodejs-website-boilerplate
 cd nodejs-website-boilerplate
 npm install
 ```
-Import the `bucket.json` file into your Cosmic JS bucket.  To do this go to Your Bucket > Settings > Import / Export Data.
+Import the `bucket.json` file into your Cosmic JS Bucket.  To do this go to Your Bucket > Settings > Import / Export Data.
 
 <img src="https://cosmic-s3.imgix.net/44f0d590-0303-11e9-b4bb-b3fa3d766bf7-sendgrid.gif?w=1300" width="700" />
 
