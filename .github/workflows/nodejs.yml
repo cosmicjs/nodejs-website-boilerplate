@@ -6,6 +6,7 @@ on:
       - master
 
 jobs:
+       
   build:
 
     runs-on: ubuntu-latest
@@ -25,3 +26,11 @@ jobs:
     - run: npm test
       env:
         CI: true
+
+  print-complete-status:
+    
+    runs-on: ubuntu-latest
+    steps:
+    - name: print status
+      shell: sh
+      run: echo ${{github.action}} " was a " ${{job.status}}
