@@ -21,6 +21,18 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+        
+    - name: Get npm cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - uses: actions/cache@v1
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-        
+        
     - run: npm install
     - run: npm run build --if-present
     - run: npm test
@@ -33,4 +45,4 @@ jobs:
     steps:
     - name: print status
       shell: sh
-      run: echo ${{github.action}} " was a " ${{job.status}}
+      run: echo ${{GITHUB_ACTION}} " was a " ${{job.status}}
