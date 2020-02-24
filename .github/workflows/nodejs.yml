@@ -45,4 +45,4 @@ jobs:
     steps:
     - name: print status
       shell: sh
-      run: echo ${{GITHUB_ACTION}} " was a " ${{job.status}}
+      run: echo $GITHUB_ACTION " was a " $job.status
