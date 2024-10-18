@@ -1,3 +1,6 @@
+# ⚠️ IMPORTANT
+This template is no longer supported. Select from one of the available templates on the [Cosmic templates page](https://www.cosmicjs.com/templates).
+
 # Node.js Website Boilerplate
 A  website template that satisfies some common website requirements including dynamic pages, blog articles, author management, SEO ability, contact form and website search.  Content powered by [Cosmic JS](https://cosmicjs.com).  Contributions welcome!
 ## Demo
